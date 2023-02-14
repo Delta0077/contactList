@@ -7,8 +7,14 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.get("/", function (req, res) {
+// Controller One
+app.get("/home", function (req, res) {
   return res.render("home", { title: "Contact List" });
+});
+
+// Controller Two
+app.get("/practice", function (req, res) {
+  return res.render("practice", { title: "Practice Page" });
 });
 
 app.listen(port, function (err) {
