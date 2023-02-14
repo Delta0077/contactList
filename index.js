@@ -8,8 +8,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 // Controller One
-app.get("/home", function (req, res) {
-  return res.render("home", { title: "Contact List" });
+app.get("/", function (req, res) {
+  return res.render("home", { title: "Contacts List" });
 });
 
 // Controller Two
