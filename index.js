@@ -9,7 +9,7 @@ app.set("views", path.join(__dirname, "views"));
 
 var contactList = [
   {
-    name: "Arpan",
+    name: "Tonny Stark",
     phone: "1111111111",
   },
   {
@@ -33,6 +33,11 @@ app.get("/", function (req, res) {
 // Controller Two
 app.get("/practice", function (req, res) {
   return res.render("practice", { title: "Practice Page" });
+});
+
+// New contact route
+app.post("/create-contact", function (req, res) {
+  return res.redirect("/practice");
 });
 
 app.listen(port, function (err) {
