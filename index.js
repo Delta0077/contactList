@@ -7,9 +7,27 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+var contactList = [
+  {
+    name: "Arpan",
+    phone: "1111111111",
+  },
+  {
+    name: "Deep",
+    phone: 1234567890,
+  },
+  {
+    name: "Aditya",
+    phone: 1234568901,
+  },
+];
+
 // Controller One
 app.get("/", function (req, res) {
-  return res.render("home", { title: "Contacts List" });
+  return res.render("home", {
+    title: "Contacts List",
+    contactList,
+  });
 });
 
 // Controller Two
@@ -21,5 +39,5 @@ app.listen(port, function (err) {
   if (err) {
     console.log("Error in running the server", err);
   }
-  console.log("Server is running on port:", port);
+  console.log(`Server is running on port: ${port}`);
 });

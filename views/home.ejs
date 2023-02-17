@@ -8,5 +8,16 @@
   </head>
   <body>
     <h1>Rendered from ejs view:)</h1>
+
+    <div>
+      <ul>
+        <%for(let i of contactList){%>
+        <li>
+          <p><%= i.name%></p>
+          <p><%= i.phone%></p>
+        </li>
+        <%}%>
+      </ul>
+    </div>
   </body>
 </html>
