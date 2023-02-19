@@ -7,8 +7,20 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-//parser
+//Middleware parser
 app.use(express.urlencoded());
+
+// Custom Middleware 1
+app.use(function (req, res, next) {
+  console.log("MiddleWare 1 called.");
+  next(); // If next() isn't called the page will stuck at loading.
+});
+
+// Custom Middleware 2
+app.use(function (req, res, next) {
+  console.log("MiddleWare 2 called.");
+  next();
+});
 
 let contactList = [
   {
