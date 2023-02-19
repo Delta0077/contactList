@@ -7,7 +7,10 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-var contactList = [
+//parser
+app.use(express.urlencoded());
+
+let contactList = [
   {
     name: "Tonny Stark",
     phone: "1111111111",
@@ -37,7 +40,13 @@ app.get("/practice", function (req, res) {
 
 // New contact route
 app.post("/create-contact", function (req, res) {
-  return res.redirect("/practice");
+  //Adding new contact details to the array
+  // contactList.push({
+  //   name: req.body.name,
+  //   phone: req.body.phone,
+  // });
+  contactList.push(req.body); // shorthand
+  return res.redirect("back"); // we can either use '/' or just write 'back'.
 });
 
 app.listen(port, function (err) {
