@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const port = 8000;
 
+const db = require('./config/mongoose')
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -10,17 +12,19 @@ app.set("views", path.join(__dirname, "views"));
 //Middleware parser
 app.use(express.urlencoded());
 
-// Custom Middleware 1
-app.use(function (req, res, next) {
-  console.log("MiddleWare 1 called.");
-  next(); // If next() isn't called the page will stuck at loading.
-});
+// // Custom Middleware 1
+// app.use(function (req, res, next) {
+//   console.log("MiddleWare 1 called.");
+//   next(); // If next() isn't called the page will stuck at loading.
+// });
 
-// Custom Middleware 2
-app.use(function (req, res, next) {
-  console.log("MiddleWare 2 called.");
-  next();
-});
+// // Custom Middleware 2
+// app.use(function (req, res, next) {
+//   console.log("MiddleWare 2 called.");
+//   next();
+// });
+
+app.use(express.static("assets"));
 
 let contactList = [
   {
@@ -66,4 +70,19 @@ app.listen(port, function (err) {
     console.log("Error in running the server", err);
   }
   console.log(`Server is running on port: ${port}`);
+});
+
+
+//For deleting a contact
+app.get("/delete-contact", function (req, res) {
+  //Get the query from the url
+  let phone = req.query.phone;
+
+  let contactIndex = contactList.findIndex((contact) => contact.phone == phone);
+
+  if (contactIndex != -1) {
+    contactList.splice(contactIndex, 1);
+  }
+
+  return res.redirect("back");
 });
