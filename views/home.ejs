@@ -5,16 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title%></title>
+    <script
+      src="https://kit.fontawesome.com/97662113fb.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/home.css" />
   </head>
   <body>
-    <h1>Rendered from ejs view:)</h1>
+    <div id="container">
+      <h1 id="page-heading">
+        <i class="fa-solid fa-address-book"></i>My Contacts List
+      </h1>
+    </div>
 
     <div>
-      <ul>
+      <ul id="container">
         <%for(let i of contactList){%>
-        <li>
+        <li id="list-items">
           <p><%= i.name%></p>
           <p><%= i.phone%></p>
+          <div id="btn-delete">
+            <a href="/delete-contact/?phone=<%= i.phone%>">
+              <i class="fas fa-window-close"></i>
+            </a>
+          </div>
         </li>
         <%}%>
       </ul>
@@ -26,5 +40,6 @@
       <input type="number" name="phone" placeholder="Enter Phone" required />
       <button type="submit">Add Contact</button>
     </form>
+    <script type="text/javascript" src="/js/home.js"></script>
   </body>
 </html>
