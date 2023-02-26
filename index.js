@@ -44,9 +44,15 @@ let contactList = [
 
 // Controller One
 app.get("/", function (req, res) {
-  return res.render("home", {
-    title: "Contacts List",
-    contactList,
+  Contact.find({}, (err, contacts) => {
+    if (err) {
+      console.log("error in fetching contacts from db");
+      return;
+    }
+    return res.render("home", {
+      title: "Contacts List",
+      contacts,
+    });
   });
 });
 
