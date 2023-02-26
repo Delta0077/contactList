@@ -62,8 +62,25 @@ app.post("/create-contact", function (req, res) {
   //   name: req.body.name,
   //   phone: req.body.phone,
   // });
-  contactList.push(req.body); // shorthand
-  return res.redirect("back"); // we can either use '/' or just write 'back'.
+  // contactList.push(req.body); // shorthand
+
+  Contact.create(
+    {
+      name: req.body.name,
+      phone: req.body.phone,
+    },
+    (err, newConatact) => {
+      if (err) {
+        console.log("Error in creating a contact!");
+        return;
+      }
+
+      console.log("*******", newConatact);
+      return res.redirect("back");
+    }
+  );
+
+  // return res.redirect("back"); // we can either use '/' or just write 'back'.
 });
 
 app.listen(port, function (err) {
