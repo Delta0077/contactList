@@ -98,14 +98,17 @@ app.listen(port, function (err) {
 
 //For deleting a contact
 app.get("/delete-contact", function (req, res) {
-  //Get the query from the url
-  let phone = req.query.phone;
+  //get the id from query from the url
+  let id = req.query.id;
 
-  let contactIndex = contactList.findIndex((contact) => contact.phone == phone);
-
-  if (contactIndex != -1) {
-    contactList.splice(contactIndex, 1);
-  }
+  // find the contact in the database using id and delete
+  Contact.findByIdAndRemove(id, (err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(`Removed user: ${res.name} with the id: ${res.id}.`);
+    }
+  });
 
   return res.redirect("back");
 });
